@@ -38,6 +38,7 @@ app.get('/test', (req, res) => {
 app.use('/equipment', require('./routes/equipment'));
 app.use('/types', require('./routes/types'));
 app.use('/types', require('./routes/calendar'));
+app.use('/types', require('./routes/admin/equipment'));
 
 // Обработка несуществующих маршрутов
 app.use('*', (req, res) => {
