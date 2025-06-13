@@ -6,7 +6,7 @@ const authenticateAdmin = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: 'Токен доступа отсутствует' });
     }
-    //проверка и выдача прав
+    //проверка и выдача прав добавление в бд с vk id и ролью из группы вк...
 
     
 };
