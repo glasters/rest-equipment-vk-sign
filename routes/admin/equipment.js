@@ -16,22 +16,25 @@ router.put('/equipment/:id/', authenticateAdmin, async (req, res) => {
         const { id } = req.params;
         const { equipment } = req.body;
 
-        // Получаем ID статуса
-        const [equipments] = await pool.execute(
-            `SELECT 
-                `,
-            [equipment]
-        );
 
-        if (equipments.length === 0) {
-            return res.status(400).json({ message: 'Неверный' });
-        }
-
-        const statusId = equipments[0].id_status;
+        const id_vid = equipments[0].id_vid;
+        const id_tip = equipments[0].id_tip;
+        const vnaim = equipments[0].vnaim;
+        const kolich = equipments[0].kolich;
+        const zenaz = equipments[0].zenaz;
+        const zenapr = equipments[0].zenapr;
+        const sost = equipments[0].sost;
 
         await pool.execute(
-            'UPDATE  SET  WHERE ',
-            [id  || null]
+            `UPDATE VidSn SET
+            VidSn,id_tip = ?,
+            VidSn.vnaim = ?,
+            VidSn.kolich = ?,
+            VidSn.zenaz = ?,
+            VidSn.zenapr = ?,
+            VidSn.sost = ?,
+            WHERE VidSn.id_vid=?`,
+            [id_tip,vnaim,kolich,zenaz,zenapr,sost,id_vid  || null,null,null,null,null,null,null]
         );
 
         res.json({ message: 'обновлен' });
