@@ -6,7 +6,7 @@ const authenticateAdmin = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: 'Токен доступа отсутствует' });
     }
-    //проверка и
+    //проверка и выдача прав
 
     
 };
@@ -14,34 +14,29 @@ const authenticateAdmin = (req, res, next) => {
 router.put('/equipment/:id/', authenticateAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const { status, admin_comment } = req.body;
+        const { equipment } = req.body;
 
         // Получаем ID статуса
         const [equipments] = await pool.execute(
             `SELECT 
-                VidSn.id_vid,
-                VidSn.vnaim,
-                VidSn.kolich,
-                VidSn.zenaz,
-                VidSn.zenapr,
-                VidSn.sost, FROM VidSn WHERE VidSn.id_vid = ?`,
-            [status]
+                `,
+            [equipment]
         );
 
         if (equipments.length === 0) {
-            return res.status(400).json({ message: 'Неверный статус' });
+            return res.status(400).json({ message: 'Неверный' });
         }
 
         const statusId = equipments[0].id_status;
 
         await pool.execute(
-            'UPDATE requests SET id_status = ?, admin_comment = ? WHERE id_request = ?',
-            [statusId, admin_comment || null, id]
+            'UPDATE  SET  WHERE ',
+            [id  || null]
         );
 
-        res.json({ message: 'Статус заявки обновлен' });
+        res.json({ message: 'обновлен' });
     } catch (error) {
-        console.error('Ошибка обновления статуса:', error);
-        res.status(500).json({ message: 'Ошибка обновления статуса' });
+        console.error('Ошибка обновления :', error);
+        res.status(500).json({ message: 'Ошибка обновления ' });
     }
 });
