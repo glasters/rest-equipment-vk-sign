@@ -37,7 +37,7 @@ app.get('/test', (req, res) => {
 // API Маршруты
 app.use('/equipment', require('./routes/equipment'));
 app.use('/types', require('./routes/types'));
-app.use('/types', require('./routes/calendar'));
+app.use('/calendar', require('./routes/calendar'));
 //app.use('/types', require('./routes/admin/equipment'));
 
 // Обработка несуществующих маршрутов

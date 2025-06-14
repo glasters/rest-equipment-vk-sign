@@ -10,12 +10,12 @@ router.get('/', async (req, res) => {
         const [equipment] = await pool.execute(`
             SELECT 
                 VidSn.id_vid,
-                TipSn,tnaim,
+                TipSn.tnaim,
                 VidSn.vnaim,
                 VidSn.kolich,
                 VidSn.zenaz,
                 VidSn.zenapr,
-                VidSn.sost,
+                VidSn.sost
             FROM VidSn
             LEFT JOIN TipSn ON VidSn.id_tip=TipSn.id_tip
         `);
